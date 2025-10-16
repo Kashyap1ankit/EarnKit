@@ -13,7 +13,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="antalised mx-auto p-2 pt-4 text-white">{children}</body>
+      <body className="overflow-x-hidden">{children}</body>
     </html>
   );
 }
