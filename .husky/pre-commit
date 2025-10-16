@@ -1,0 +1,4 @@
+pnpm run format:write
+pnpm run format:check
+pnpm run build
+git add .
