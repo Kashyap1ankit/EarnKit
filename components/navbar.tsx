@@ -38,7 +38,7 @@ export default function Navbar() {
       </div>
 
       <div>
-        <Button className="bg-primary-btn hover:bg-primary-btn cursor-pointer rounded-[10px] border-4 border-black/20 p-4 px-12 py-4 inset-shadow-sm inset-shadow-white">
+        <Button className="bg-primary-btn hover:bg-primary-btn cursor-pointer rounded-[10px] border-3 border-black/20 p-4 px-6 py-4 inset-shadow-sm inset-shadow-white">
           <p className={`${funnel.className} font-medium`}>Login</p>
         </Button>
       </div>
