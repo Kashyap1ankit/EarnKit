@@ -126,3 +126,7 @@
   --color-secondary-btn: #af52de;
   --color-primary-background: #ffffff1a;
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
