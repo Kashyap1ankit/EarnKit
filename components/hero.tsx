@@ -3,7 +3,6 @@
 import { funnel } from "@/lib/font";
 import {
   CircleStackIcon,
-  DocumentArrowDownIcon,
   DocumentIcon,
   PaperAirplaneIcon,
   PaperClipIcon,
@@ -25,7 +24,8 @@ import { FigmaIcon } from "lucide-react";
 
 export default function HeroSection() {
   const [files, setFiles] = useState<File[]>([]);
-
+  const [isListening, setIsListening] = useState(false);
+  const recognitionRef = useRef<any>(null);
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const fileUploadRef = useRef<HTMLInputElement>(null);
 
@@ -33,6 +33,7 @@ export default function HeroSection() {
     register,
     watch,
     reset,
+    setValue,
     formState: { errors, isValid },
     handleSubmit,
   } = useForm({
@@ -48,8 +49,8 @@ export default function HeroSection() {
     if (!textarea) return;
 
     const handleInput = () => {
-      textarea.style.height = "auto"; // reset height first
-      const newHeight = Math.min(textarea.scrollHeight, 200); // limit height to 80px
+      textarea.style.height = "auto";
+      const newHeight = Math.min(textarea.scrollHeight, 200);
       textarea.style.height = `${newHeight}px`;
     };
 
@@ -59,19 +60,46 @@ export default function HeroSection() {
     return () => textarea.removeEventListener("input", handleInput);
   }, []);
 
-  function handleFileOpenClick() {
-    const inputField = fileUploadRef.current;
-    if (!inputField) return;
+  function startListening() {
+    const SpeechRecognition =
+      window.SpeechRecognition || (window as any).webkitSpeechRecognition;
 
-    inputField.click();
+    if (!SpeechRecognition) {
+      toast.error("Speech recognition is not supported in this browser.");
+      return;
+    }
+
+    const recognition = new SpeechRecognition();
+    recognition.lang = "en-US";
+    recognition.continuous = false;
+    recognition.interimResults = false;
+    recognitionRef.current = recognition;
+
+    recognition.onstart = () => setIsListening(true);
+    recognition.onerror = () => {
+      toast.error("Could not process speech, please try again.");
+      setIsListening(false);
+    };
+    recognition.onend = () => setIsListening(false);
+    recognition.onresult = (event: any) => {
+      const transcript = event.results[0][0].transcript;
+      setValue("idea", transcript, { shouldValidate: true });
+    };
+    recognition.start();
   }
 
-  async function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
+  function cancelListening() {
+    recognitionRef.current?.stop();
+    setIsListening(false);
+  }
+
+  function handleFileOpenClick() {
+    fileUploadRef.current?.click();
+  }
+
+  function handleFileChange(e: ChangeEvent<HTMLInputElement>) {
     const selected = e.target.files ? Array.from(e.target.files) : [];
-    setFiles((prev) => {
-      const combined = [...prev, ...selected];
-      return combined.slice(0, 4); // limit to 4
-    });
+    setFiles((prev) => [...prev, ...selected].slice(0, 4));
   }
 
   function handleFileRemove(index: number) {
@@ -86,16 +114,15 @@ export default function HeroSection() {
   }
 
   useEffect(() => {
-    if (errors.idea?.message) {
-      toast.error(errors.idea.message);
-      return;
-    }
+    if (errors.idea?.message) toast.error(errors.idea.message);
   }, [errors.idea?.message]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center">
-      <div className="flex flex-col items-center justify-center gap-y-6">
-        <p className={`${funnel.className} text-6xl font-bold`}>
+    <div className="flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 md:px-8">
+      <div className="flex flex-col items-center gap-y-4 text-center sm:gap-y-6">
+        <p
+          className={`${funnel.className} text-4xl leading-tight font-bold sm:text-5xl md:text-6xl`}
+        >
           Build viral miniapps on{" "}
           <span className="relative inline-block">
             <span className="bg-secondary-btn absolute inset-0 z-[-1] -skew-y-3 rounded-md"></span>
@@ -106,20 +133,23 @@ export default function HeroSection() {
         </p>
 
         <p
-          className={`${funnel.className} text-xl font-medium text-neutral-500`}
+          className={`${funnel.className} text-base font-medium text-neutral-500 sm:text-lg md:text-xl`}
         >
           Create miniapps with a single prompt—no coding required.
         </p>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <div className="mt-24 mb-12 w-[800px] rounded-[24px] border border-neutral-200 bg-white p-4 shadow-md">
+      <form
+        onSubmit={handleSubmit(onSubmit)}
+        className="mt-16 mb-10 w-full max-w-[800px]"
+      >
+        <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-md sm:p-6">
           {files.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-3">
               {files.map((f, i) => (
                 <div
                   key={i}
-                  className="relative flex w-fit items-center gap-3 rounded-2xl bg-[#0000001A] p-2"
+                  className="bg-secondary-white relative flex w-fit items-center gap-3 rounded-2xl p-2"
                 >
                   <DocumentIcon className="size-6 fill-white" />
                   <div>
@@ -129,7 +159,7 @@ export default function HeroSection() {
                     <p
                       className={`text-xs text-gray-400 ${funnel.className} font-semibold`}
                     >
-                      {Number((f.size / 1048576).toFixed(2))} MB
+                      {(f.size / 1048576).toFixed(2)} MB
                     </p>
                   </div>
                   <XMarkIcon
@@ -144,42 +174,40 @@ export default function HeroSection() {
           <textarea
             {...register("idea")}
             ref={(el) => {
-              // combine refs safely
               register("idea").ref(el);
               textareaRef.current = el;
             }}
             placeholder="Spin-to-win rewards for my podcast listeners"
-            className={`min-h-[30px] w-full resize-none outline-none ${funnel.className} no-scrollbar`}
+            className={`no-scrollbar min-h-[40px] w-full resize-none text-sm outline-none sm:text-base ${funnel.className}`}
           />
 
-          <div className="flex flex-row items-center justify-between">
-            <div className="flex flex-row items-center justify-between gap-x-4">
+          <div className="mt-4 flex flex-row flex-wrap items-center justify-between gap-y-3">
+            <div className="flex flex-row items-center gap-x-3 sm:gap-x-4">
               <Popover>
                 <PopoverTrigger>
-                  <div className="flex w-fit cursor-pointer flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-100 p-1 hover:border-neutral-200 hover:bg-gray-100">
+                  <div className="flex w-fit cursor-pointer items-center justify-center gap-x-1 rounded-full border border-neutral-100 p-1 hover:border-neutral-200 hover:bg-gray-100">
                     <PlusIcon width={16} height={16} />
                   </div>
                 </PopoverTrigger>
                 <PopoverContent className="flex max-w-fit flex-col gap-y-4">
-                  <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
+                  <div className="flex cursor-pointer flex-row items-center gap-x-2">
                     <CircleStackIcon width={16} height={16} />
-                    <p className={`${funnel.className} text-sm font-normal`}>
+                    <p className={`${funnel.className} text-sm`}>
                       Connect Database
                     </p>
                   </div>
-
-                  <div className="flex cursor-pointer flex-row items-center justify-center gap-x-2">
+                  <div className="flex cursor-pointer flex-row items-center gap-x-2">
                     <FigmaIcon width={16} height={16} />
-                    <p className={`${funnel.className} text-sm font-normal`}>
-                      Import from figma
+                    <p className={`${funnel.className} text-sm`}>
+                      Import from Figma
                     </p>
                   </div>
                 </PopoverContent>
               </Popover>
 
               <div
-                className="flex w-fit cursor-pointer flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-100 px-2 py-1 hover:border-neutral-200 hover:bg-gray-100"
                 onClick={handleFileOpenClick}
+                className="flex cursor-pointer items-center gap-x-1 rounded-full border border-neutral-100 px-2 py-1 hover:border-neutral-200 hover:bg-gray-100"
               >
                 <PaperClipIcon width={16} height={16} color="gray" />
                 <p
@@ -190,15 +218,29 @@ export default function HeroSection() {
               </div>
             </div>
 
-            <div className="flex flex-row items-center justify-between gap-x-4">
-              <div className="flex w-fit cursor-pointer flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-100 p-1 hover:border-neutral-200 hover:bg-gray-100">
+            <div className="flex flex-row items-center gap-x-3">
+              {isListening && (
+                <div
+                  onClick={cancelListening}
+                  className="cursor-pointer rounded-full bg-red-500 p-1"
+                >
+                  <XMarkIcon className="size-4 text-white" />
+                </div>
+              )}
+
+              <div
+                onClick={startListening}
+                className={`flex cursor-pointer items-center justify-center rounded-full border border-neutral-100 p-1 transition-all ${
+                  isListening
+                    ? "bg-secondary-btn text-white"
+                    : "hover:border-neutral-200 hover:bg-gray-100"
+                }`}
+              >
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 24 24"
-                  width="100%"
-                  height="100%"
-                  className="relative z-10 h-5 w-5 shrink-0"
+                  className="h-5 w-5"
                 >
                   <path
                     fill="currentColor"
@@ -208,31 +250,45 @@ export default function HeroSection() {
               </div>
 
               <Button
+                type="submit"
                 variant={"outline"}
-                className={`flex h-10 w-10 cursor-pointer flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-200 hover:border-neutral-200 ${disabled ? "bg-[#00000066] hover:bg-gray-100" : "bg-secondary-btn hover:bg-secondary-btn"}`}
                 disabled={disabled}
+                className={`flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 ${
+                  disabled
+                    ? "bg-[#00000033] hover:bg-gray-100"
+                    : "bg-secondary-btn hover:bg-secondary-btn"
+                }`}
               >
                 <PaperAirplaneIcon
                   width={16}
                   height={16}
                   color={disabled ? "black" : "white"}
-                  className="font-bold"
                 />
               </Button>
             </div>
           </div>
         </div>
 
-        <div>
-          <input
-            type="file"
-            ref={fileUploadRef}
-            className="hidden"
-            onChange={handleFileChange}
-            multiple
-          />
-        </div>
+        <input
+          type="file"
+          ref={fileUploadRef}
+          className="hidden"
+          onChange={handleFileChange}
+          multiple
+        />
       </form>
+
+      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+        {["Spin App", "Launchpad", "Music Token", "Quest"].map((idea) => (
+          <div
+            key={idea}
+            onClick={() => setValue("idea", idea)}
+            className="bg-secondary-white cursor-pointer rounded-lg p-2 transition hover:bg-gray-100"
+          >
+            <p className={`${funnel.className} text-xs`}>{idea}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }

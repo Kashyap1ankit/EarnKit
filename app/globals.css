@@ -125,6 +125,7 @@
   --color-primary-btn: #ff9500;
   --color-secondary-btn: #af52de;
   --color-primary-background: #ffffff1a;
+  --color-secondary-white: #0000001a;
 }
 
 .no-scrollbar::-webkit-scrollbar {
