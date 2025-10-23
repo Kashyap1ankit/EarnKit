@@ -143,7 +143,7 @@ export default function HeroSection() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-16 mb-10 w-full max-w-[800px]"
       >
-        <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-md sm:p-6">
+        <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-md outline-4 outline-[#dadada]">
           {files.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-3">
               {files.map((f, i) => (
