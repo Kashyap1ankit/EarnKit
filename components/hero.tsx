@@ -2,6 +2,8 @@
 
 import { funnel } from "@/lib/font";
 import {
+  ArrowLongUpIcon,
+  ArrowUpIcon,
   CircleStackIcon,
   DocumentIcon,
   PaperAirplaneIcon,
@@ -21,6 +23,7 @@ import {
   PopoverTrigger,
 } from "@/components/ui/popover";
 import { FigmaIcon } from "lucide-react";
+import Image from "next/image";
 
 export default function HeroSection() {
   const [files, setFiles] = useState<File[]>([]);
@@ -118,13 +121,23 @@ export default function HeroSection() {
   }, [errors.idea?.message]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 sm:px-6 md:px-8">
+    <div className="flex min-h-screen flex-col items-center justify-center px-4 pt-24 sm:px-6 md:px-8 md:pt-0">
       <div className="flex flex-col items-center gap-y-4 text-center sm:gap-y-6">
+        <div className="w-16 rounded-full bg-black p-3 inset-shadow-sm inset-shadow-white/80">
+          <Image
+            src={"/logo-2.png"}
+            className="invert"
+            width={500}
+            height={500}
+            alt="logo-2"
+          />
+        </div>
+
         <p
-          className={`${funnel.className} text-4xl leading-tight font-bold sm:text-5xl md:text-6xl`}
+          className={`${funnel.className} text-4xl leading-tight font-medium sm:text-5xl md:text-6xl`}
         >
           Build viral miniapps on{" "}
-          <span className="relative inline-block">
+          <span className="relative z-30 inline-block">
             <span className="bg-secondary-btn absolute inset-0 z-[-1] -skew-y-3 rounded-md"></span>
             <span className="relative text-white dark:text-gray-950">
               Farcaster
@@ -143,7 +156,7 @@ export default function HeroSection() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-16 mb-10 w-full max-w-[800px]"
       >
-        <div className="rounded-2xl border border-neutral-200 bg-white p-4 shadow-md outline-4 outline-[#dadada]">
+        <div className="rounded-2xl border border-neutral-200 bg-white p-4 ring-8 ring-black/10">
           {files.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-3">
               {files.map((f, i) => (
@@ -259,7 +272,7 @@ export default function HeroSection() {
                     : "bg-secondary-btn hover:bg-secondary-btn"
                 }`}
               >
-                <PaperAirplaneIcon
+                <ArrowUpIcon
                   width={16}
                   height={16}
                   color={disabled ? "black" : "white"}
@@ -283,9 +296,12 @@ export default function HeroSection() {
           <div
             key={idea}
             onClick={() => setValue("idea", idea)}
-            className="bg-secondary-white cursor-pointer rounded-lg p-2 transition hover:bg-gray-100"
+            className="flex cursor-pointer flex-row items-center justify-center gap-x-1 rounded-lg bg-white/40 px-6 py-2 transition hover:bg-gray-100"
           >
-            <p className={`${funnel.className} text-xs`}>{idea}</p>
+            <p className={`${funnel.className} text-xs text-black/60`}>
+              {idea}
+            </p>
+            <ArrowLongUpIcon className="size-4 text-black/60" />
           </div>
         ))}
       </div>
