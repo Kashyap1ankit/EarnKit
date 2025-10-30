@@ -8,84 +8,82 @@ import {
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
+import { GlowingLineChart } from "./ui/glowing-line";
+
+const howItWorks = [
+  {
+    title: "Type an Idea",
+    subtitle: "Describe your idea in plain English.",
+    component: TypeIdeaSection,
+    icon: LightBulbIcon,
+  },
+  {
+    title: "We Generate Everything",
+    subtitle:
+      "Smart contracts, UI, and miniapp are auto-generated. Iterate with AI.",
+    component: GenerateEverythingSvg,
+    icon: CodeBracketIcon,
+  },
+  {
+    title: "Launch & Earn",
+    subtitle: "Go live with a token and start earning $MINI.",
+    component: LaunchEarnSvg,
+    icon: RocketLaunchIcon,
+  },
+];
 
 export default function HowItWorks() {
   return (
-    <div className="flex flex-col gap-y-24">
-      <p
-        className={`${funnel.className} text-center text-4xl leading-tight font-bold sm:text-3xl md:text-4xl`}
-      >
-        How it{" "}
-        <span className="relative inline-block">
-          <span className="bg-secondary-btn absolute inset-0 z-[-1] -skew-y-3 rounded-md"></span>
-          <span className="relative text-white dark:text-gray-950">
-            Works ?
-          </span>
-        </span>
-      </p>
-
-      <div className="grid-row-1 md:grid-row-2 mx-auto grid w-3/4 gap-4 divide-x divide-y md:grid-cols-2">
-        <div className="group relative h-full w-full cursor-pointer overflow-hidden rounded-3xl border border-neutral-200 md:row-span-2">
-          <div className="p-4">
-            <TypeIdeaSection />
-            <div className="flex flex-row items-center justify-start gap-x-2">
-              <LightBulbIcon width={20} height={20} />
-              <p className={`${funnel.className} text-2xl font-bold`}>
-                Type an Idea
-              </p>
-            </div>
-
-            <p
-              className={`${funnel.className} text-lg font-normal text-black/70`}
-            >
-              Describe your idea in plain English.
-            </p>
-          </div>
-
-          <div className="absolute bottom-0 mt-8 h-2/3 w-full bg-linear-to-t from-black/80 via-black/50 to-black/20 opacity-0 blur-sm duration-500 group-hover:mt-0 group-hover:opacity-100"></div>
+    <div className="flex flex-col gap-y-12">
+      <div className="flex flex-col gap-y-4">
+        <div className="py mx-auto flex w-fit flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-200 px-4">
+          <div className="bg-secondary-btn h-2 w-2 rounded-full" />
+          <p className={`${funnel.className} text-xs`}>Working</p>
         </div>
 
-        <div className="group relative min-h-[200px] w-full cursor-pointer overflow-hidden rounded-3xl border border-neutral-200">
-          <div className="p-4">
-            <GenerateEverythingSvg />
+        <p
+          className={`${funnel.className} text-center text-4xl leading-tight font-bold sm:text-3xl md:text-4xl`}
+        >
+          How Earnkit Application Works ?
+        </p>
+      </div>
 
-            <div className="flex flex-row items-center justify-start gap-x-2">
-              <CodeBracketIcon width={20} height={20} />
-              <p className={`${funnel.className} text-2xl font-bold`}>
-                We Generate Everything
-              </p>
-            </div>
-
-            <p
-              className={`${funnel.className} text-lg font-normal text-black/70`}
+      <div className="grid-row-1 mx-auto grid w-3/4 gap-4 divide-x divide-y md:grid-cols-3">
+        {howItWorks.map((e, i) => {
+          return (
+            <div
+              key={i}
+              className="group relative h-full w-full cursor-pointer overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50"
             >
-              Smart contracts, UI, and miniapp are auto-generated. Iterate with
-              AI.
-            </p>
-          </div>
+              <div className="p-4">
+                <div className="bg-secondary-btn flex w-fit flex-row items-center justify-start gap-x-1 rounded-lg px-4 py-1">
+                  <p
+                    className={`${funnel.className} text-2xl font-bold text-white shadow-sm`}
+                  >
+                    {i + 1}
+                  </p>
+                  <e.icon width={20} height={20} color="white" />
+                </div>
 
-          <div className="from-primary-btn/10 to-primary-btn/20 absolute bottom-0 mt-8 h-20 w-full bg-linear-to-t opacity-0 blur-sm duration-500 group-hover:mt-0 group-hover:opacity-100"></div>
-        </div>
+                <div className="mt-4">
+                  <p className={`${funnel.className} text-2xl font-bold`}>
+                    {e.title}
+                  </p>
 
-        <div className="group relative min-h-[200px] w-full cursor-pointer overflow-hidden rounded-3xl border border-neutral-200">
-          <div className="p-4">
-            <LaunchEarnSvg />
-            <div className="flex flex-row items-center justify-start gap-x-2">
-              <RocketLaunchIcon width={20} height={20} />
-              <p className={`${funnel.className} text-2xl font-bold`}>
-                Launch & Earn
-              </p>
+                  <p
+                    className={`${funnel.className} text-sm font-normal text-black/70`}
+                  >
+                    {e.subtitle}
+                  </p>
+                </div>
+
+                <div className="mt-12">
+                  <GlowingLineChart />
+                </div>
+              </div>
             </div>
-
-            <p
-              className={`${funnel.className} text-lg font-normal text-black/70`}
-            >
-              Go live with a token and start earning $MINI.
-            </p>
-          </div>
-
-          <div className="absolute bottom-0 mt-8 h-2/3 w-full bg-linear-to-t from-black/80 via-black/50 to-black/20 opacity-0 blur-sm duration-500 group-hover:mt-0 group-hover:opacity-100"></div>
-        </div>
+          );
+        })}
       </div>
     </div>
   );

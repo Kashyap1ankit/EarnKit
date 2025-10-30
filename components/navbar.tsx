@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`fixed top-0 z-50 flex flex-row items-center justify-between px-12 py-2 duration-500 ${addBlur ? "left-1/2 mx-auto w-1/2 -translate-x-1/2 rounded-md border-b border-neutral-200 bg-white/20 backdrop-blur-[17px]" : "left-0 w-full"}`}
+      className={`fixed top-2 z-50 flex flex-row items-center justify-between px-12 py-2 duration-500 ${addBlur ? "left-1/2 mx-auto w-1/2 -translate-x-1/2 rounded-md border-b border-neutral-200 bg-white/20 backdrop-blur-[17px]" : "left-0 w-full"}`}
     >
       <div>
         <Image
@@ -38,8 +38,13 @@ export default function Navbar() {
       </div>
 
       <div>
-        <Button className="bg-secondary-btn hover:bg-primary-btn cursor-pointer rounded-[10px] border-3 border-black/20 p-4 px-6 py-4 inset-shadow-sm inset-shadow-white">
-          <p className={`${funnel.className} font-medium`}>Login</p>
+        <Button
+          size={"sm"}
+          className="cursor-pointer rounded-lg bg-white/50 p-4 px-6 py-2 hover:bg-white/50"
+        >
+          <p className={`${funnel.className} font-medium text-black/70`}>
+            Login
+          </p>
         </Button>
       </div>
     </div>

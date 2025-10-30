@@ -4,12 +4,12 @@ import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (
-    <div>
+    <div className="flex flex-col gap-y-24">
       <div className="w-full bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat">
         <Navbar />
         <HeroSection />
       </div>
-      <div className="bg-primary-background">
+      <div className="bg-primary-background flex flex-col gap-y-24">
         <HowItWorks />
       </div>
     </div>

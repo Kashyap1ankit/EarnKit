@@ -198,7 +198,7 @@ export default function HeroSection() {
             <div className="flex flex-row items-center gap-x-3 sm:gap-x-4">
               <Popover>
                 <PopoverTrigger>
-                  <div className="flex w-fit cursor-pointer items-center justify-center gap-x-1 rounded-full border border-neutral-100 p-1 hover:border-neutral-200 hover:bg-gray-100">
+                  <div className="flex w-fit cursor-pointer items-center justify-center gap-x-1 rounded-full border border-neutral-100 bg-gray-400/10 p-1 hover:border-neutral-200 hover:bg-gray-400/10">
                     <PlusIcon width={16} height={16} />
                   </div>
                 </PopoverTrigger>
@@ -220,7 +220,7 @@ export default function HeroSection() {
 
               <div
                 onClick={handleFileOpenClick}
-                className="flex cursor-pointer items-center gap-x-1 rounded-full border border-neutral-100 px-2 py-1 hover:border-neutral-200 hover:bg-gray-100"
+                className="flex cursor-pointer items-center gap-x-1 rounded-full border border-neutral-100 bg-gray-400/10 px-2 py-1 hover:border-neutral-200 hover:bg-gray-400/10"
               >
                 <PaperClipIcon width={16} height={16} color="gray" />
                 <p
@@ -269,7 +269,7 @@ export default function HeroSection() {
                 className={`flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 ${
                   disabled
                     ? "bg-[#00000033] hover:bg-gray-100"
-                    : "bg-secondary-btn hover:bg-secondary-btn"
+                    : "bg-linear-to-t from-gray-800 to-white"
                 }`}
               >
                 <ArrowUpIcon
