@@ -4,30 +4,33 @@ import { motion, AnimatePresence } from "motion/react";
 import { funnel } from "@/lib/font";
 import {
   CodeBracketIcon,
+  DevicePhoneMobileIcon,
   LightBulbIcon,
   RocketLaunchIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { GlowingLineChart } from "./ui/glowing-line";
+import { ClippedAreaChart } from "./ui/clipped.-area-graph";
 
 const howItWorks = [
   {
     title: "Type an Idea",
-    subtitle: "Describe your idea in plain English.",
+    subtitle:
+      "Describe your idea clearly and simply, as if you are explaining it to someone with no background in the topic. Focus on what problem it solves.",
     component: TypeIdeaSection,
     icon: LightBulbIcon,
   },
   {
     title: "We Generate Everything",
     subtitle:
-      "Smart contracts, UI, and miniapp are auto-generated. Iterate with AI.",
+      "AI generates the smart contracts, user interface, and mini-app, ready for instant iteration. Just test and add more features with one line prompts",
     component: GenerateEverythingSvg,
     icon: CodeBracketIcon,
   },
   {
     title: "Launch & Earn",
-    subtitle: "Go live with a token and start earning $MINI.",
-    component: LaunchEarnSvg,
+    subtitle:
+      "Deploy your token on-chain with one click. Launch, iterate, and start earning $MINI rewards from day one.",
+    component: ClippedAreaChart,
     icon: RocketLaunchIcon,
   },
 ];
@@ -53,33 +56,31 @@ export default function HowItWorks() {
           return (
             <div
               key={i}
-              className="group relative h-full w-full cursor-pointer overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50"
+              className="flex h-full w-full cursor-pointer flex-col gap-y-6 overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 p-4"
             >
-              <div className="p-4">
-                <div className="bg-secondary-btn flex w-fit flex-row items-center justify-start gap-x-1 rounded-lg px-4 py-1">
-                  <p
-                    className={`${funnel.className} text-2xl font-bold text-white shadow-sm`}
-                  >
-                    {i + 1}
-                  </p>
-                  <e.icon width={20} height={20} color="white" />
-                </div>
+              <div className="bg-secondary-btn flex w-fit flex-row items-center justify-start gap-x-1 rounded-lg px-4 py-1 inset-shadow-sm inset-shadow-white/50">
+                <p
+                  className={`${funnel.className} text-2xl font-bold text-white shadow-sm`}
+                >
+                  {i + 1}
+                </p>
+                <e.icon width={20} height={20} color="white" />
+              </div>
 
-                <div className="mt-4">
-                  <p className={`${funnel.className} text-2xl font-bold`}>
-                    {e.title}
-                  </p>
+              <div>
+                <p className={`${funnel.className} text-2xl font-bold`}>
+                  {e.title}
+                </p>
 
-                  <p
-                    className={`${funnel.className} text-sm font-normal text-black/70`}
-                  >
-                    {e.subtitle}
-                  </p>
-                </div>
+                <p
+                  className={`${funnel.className} text-sm font-normal text-black/70`}
+                >
+                  {e.subtitle}
+                </p>
+              </div>
 
-                <div className="mt-12">
-                  <GlowingLineChart />
-                </div>
+              <div>
+                <e.component />
               </div>
             </div>
           );
@@ -91,45 +92,45 @@ export default function HowItWorks() {
 
 function GenerateEverythingSvg() {
   return (
-    <div className="bg-muted/20 flex h-full items-center justify-around p-4 pt-8">
-      <div className="bg-muted/80 border-accent flex size-24 -rotate-12 items-center justify-center rounded-2xl border p-3">
+    <div className="border-neutral flex h-84 flex-1 items-center justify-around rounded-xl border bg-white p-4 pt-8 shadow-sm">
+      <motion.div
+        className="bg-muted/80 border-accent flex size-24 -rotate-12 items-center justify-center rounded-2xl border p-3"
+        animate={{
+          y: [0, 20, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+        }}
+      >
         <svg
-          className="size-16"
-          viewBox="0 0 104 98"
-          fill="none"
           xmlns="http://www.w3.org/2000/svg"
+          width="120"
+          height="124"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="#000000"
+          stroke-width="1.25"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          className="icon icon-tabler icons-tabler-outline icon-tabler-brand-figma"
         >
-          <path
-            d="M98.1164 28.0293C100.116 29.0293 100.116 29.0293 101.304 32.0918C101.085 36.6804 100.557 37.114 97.3039 40.0918C83.8861 50.7805 70.2181 55.5922 53.1164 54.0293C50.538 53.3956 48.1074 52.592 45.6046 51.7129C36.8179 49.2989 27.9611 50.5889 20.1164 55.0293C15.4106 58.0994 10.8541 61.2483 6.92105 65.2793C5.11636 67.0293 5.11636 67.0293 3.11636 67.0293C2.16527 63.8963 1.66692 62.1971 2.11636 59.0293C7.39672 51.6591 17.9625 45.7112 26.589 43.3535C33.7134 42.4396 41.167 42.073 47.9914 44.5293C57.2791 47.7272 68.5193 47.2473 77.5265 43.4277C85.1116 39.332 91.6987 33.7339 98.1164 28.0293Z"
-            fill="currentColor"
-          ></path>
-          <path
-            d="M103.117 45.0293C103.997 48.6298 104.167 51.4505 103.117 55.0293C96.82 61.2878 88.5293 65.3859 80.1172 68.0293C79.4778 68.2523 78.8384 68.4753 78.1797 68.7051C70.8724 70.9429 61.9942 71.4493 54.8672 68.5293C47.1146 65.5739 37.5073 65.6414 29.6328 68.1309C23.8844 70.8592 19.2036 74.2837 14.7383 78.8066C14.2033 79.2101 13.6684 79.6136 13.1172 80.0293C12.1272 79.6993 11.1372 79.3693 10.1172 79.0293C8.92969 76.4668 8.92969 76.4668 8.11719 74.0293C16.4412 65.5512 27.5702 58.0817 39.8047 57.7168C45.015 57.7377 49.6667 58.7561 54.6797 60.0293C67.6639 63.2615 76.7209 62.3316 88.6992 55.5723C92.019 53.4288 99.6693 45.0293 103.117 45.0293Z"
-            fill="currentColor"
-          ></path>
-          <path
-            d="M90.119 17.0293C91.439 17.6893 92.759 18.3493 94.119 19.0293C94.119 23.0293 94.119 23.0293 92.7557 24.7402C87.292 29.4047 81.6023 32.9376 75.119 36.0293C74.4126 36.3722 73.7062 36.7151 72.9784 37.0684C62.8662 41.1981 51.2343 39.6002 41.0526 36.7129C31.9601 34.5941 23.2442 35.398 15.119 40.0293C11.9611 42.1927 9.02933 44.5458 6.11903 47.0293C4.93163 48.0086 3.74415 48.9878 2.55653 49.9668C1.34996 50.9877 1.34996 50.9877 0.119027 52.0293C-0.161651 46.5093 -0.21359 43.6493 3.11903 39.0293C12.2128 30.8686 22.3821 27.3048 34.5018 27.623C39.4844 28.1826 44.0292 29.6278 48.7987 31.127C60.6532 34.3486 70.2359 30.4302 80.5214 24.6582C84.0797 22.4269 87.0515 19.8924 90.119 17.0293Z"
-            fill="currentColor"
-          ></path>
-          <path
-            d="M80.8672 7.0293C83.2092 8.0702 84.3784 9.19053 86.1172 11.0293C72.0185 21.8866 60.7628 25.357 43.1172 24.0293C40.4786 23.4274 38.0674 22.6229 35.5234 21.7168C26.3149 19.0858 18.1974 21.2414 9.69922 25.0332C8.84715 25.3619 7.99508 25.6906 7.11719 26.0293C6.45719 25.6993 5.79719 25.3693 5.11719 25.0293C6.0516 23.7562 6.98986 22.4859 7.92969 21.2168C8.45176 20.5091 8.97383 19.8014 9.51172 19.0723C12.1539 15.7101 13.7661 13.6638 18.1172 13.0293C25.3235 12.5789 32.1923 12.5356 39.1797 14.5293C50.1457 17.6057 60.7831 16.858 71.1172 12.0293C72.46 11.1357 73.7777 10.2021 75.0547 9.2168C78.1172 7.0293 78.1172 7.0293 80.8672 7.0293Z"
-            fill="currentColor"
-          ></path>
-          <path
-            d="M97.1172 69.0293C98.1072 69.5243 98.1072 69.5243 99.1172 70.0293C92.0949 81.2994 92.0949 81.2994 86.4922 83.1543C85.0429 83.4882 83.5842 83.7848 82.1172 84.0293C81.1272 84.2562 80.1372 84.483 79.1172 84.7168C72.2449 85.4327 67.0464 85.1296 60.3672 83.0293C49.5718 79.7907 41.1051 79.9468 30.7734 84.5449C27.9531 86.121 25.5781 87.9429 23.1172 90.0293C19.956 88.6595 19.1245 88.0402 17.1172 85.0293C27.827 76.4842 38.1058 71.6647 52.1172 73.0293C54.8543 73.5936 57.5449 74.2999 60.2422 75.0293C73.4854 78.5665 82.1937 76.7579 94.3828 70.2988C95.2852 69.8799 96.1875 69.4609 97.1172 69.0293Z"
-            fill="currentColor"
-          ></path>
-          <path
-            d="M76.1172 93.0297C74.8317 95.6008 73.8981 95.7778 71.2422 96.7797C66.3487 98.341 62.7385 97.6952 57.8086 96.5844C52.1284 95.4137 46.6396 95.9474 40.9297 96.6547C36.8356 97.121 33.9442 96.7418 30.1172 95.0297C30.1172 94.3697 30.1172 93.7097 30.1172 93.0297C46.7579 86.0441 59.1312 88.0075 76.1172 93.0297Z"
-            fill="currentColor"
-          ></path>
-          <path
-            d="M70.0547 1.0289C71.0756 1.5239 71.0756 1.5239 72.1172 2.0289C62.4279 9.74933 50.9897 10.1654 39.1172 9.0289C35.0117 8.29504 31.0772 7.33338 27.1172 6.0289C27.1172 5.3689 27.1172 4.7089 27.1172 4.0289C32.1938 1.76257 35.3006 0.697183 40.9102 1.69297C50.8993 3.21343 60.6968 -2.15674 70.0547 1.0289Z"
-            fill="currentColor"
-          ></path>
+          <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+          <path d="M15 12m-3 0a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+          <path d="M6 3m0 3a3 3 0 0 1 3 -3h6a3 3 0 0 1 3 3v0a3 3 0 0 1 -3 3h-6a3 3 0 0 1 -3 -3z" />
+          <path d="M9 9a3 3 0 0 0 0 6h3m-3 0a3 3 0 1 0 3 3v-15" />
         </svg>
-      </div>
-      <div className="border-accent flex size-20 -translate-y-8 items-center justify-center rounded-2xl border-2 border-dashed p-3">
+      </motion.div>
+      <motion.div
+        animate={{
+          y: [0, -20, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+        }}
+        className="border-accent flex size-20 -translate-y-8 items-center justify-center rounded-2xl border-2 border-dashed p-3"
+      >
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="24"
@@ -148,8 +149,17 @@ function GenerateEverythingSvg() {
           <path d="m5 12-3 3 3 3"></path>
           <path d="m9 18 3-3-3-3"></path>
         </svg>
-      </div>
-      <div className="bg-muted/80 border-accent flex size-24 rotate-12 items-center justify-center rounded-2xl border p-3">
+      </motion.div>
+      <motion.div
+        animate={{
+          y: [0, 20, 0],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+        }}
+        className="bg-muted/80 border-accent flex size-24 rotate-12 items-center justify-center rounded-2xl border p-3"
+      >
         <svg
           className="size-16"
           viewBox="0 -1 256 256"
@@ -216,62 +226,11 @@ function GenerateEverythingSvg() {
             </g>
           </g>
         </svg>
-      </div>
+      </motion.div>
     </div>
   );
 }
-function LaunchEarnSvg() {
-  return (
-    <div className="bg-muted/20 flex h-full items-center justify-around p-4 pt-8">
-      {/* Left rocket icon */}
-      <div className="bg-muted/80 border-accent flex size-24 -rotate-12 items-center justify-center rounded-2xl border p-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke-width="1.5"
-          stroke="currentColor"
-          className="size-12"
-        >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            d="M15.59 14.37a6 6 0 0 1-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 0 0 6.16-12.12A14.98 14.98 0 0 0 9.631 8.41m5.96 5.96a14.926 14.926 0 0 1-5.841 2.58m-.119-8.54a6 6 0 0 0-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 0 0-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 0 1-2.448-2.448 14.9 14.9 0 0 1 .06-.312m-2.24 2.39a4.493 4.493 0 0 0-1.757 4.306 4.493 4.493 0 0 0 4.306-1.758M16.5 9a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0Z"
-          />
-        </svg>
-      </div>
 
-      {/* Center coin (earn) icon */}
-      <div className="border-accent flex size-20 -translate-y-8 items-center justify-center rounded-2xl border-2 border-dashed p-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-8"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <path d="M12 6v12M8 10h8M8 14h8" />
-        </svg>
-      </div>
-
-      {/* Right sparkle or trophy icon */}
-      <div className="bg-muted/80 border-accent flex size-24 rotate-12 items-center justify-center rounded-2xl border p-3">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="size-16"
-          viewBox="0 0 24 24"
-          fill="currentColor"
-        >
-          <path d="M12 2l1.902 5.854H20l-4.951 3.6 1.902 5.854L12 13.708 7.049 17.308l1.902-5.854L4 7.854h6.098z" />
-        </svg>
-      </div>
-    </div>
-  );
-}
 function TypeIdeaSection() {
   const placeholders = [
     "An AI-powered to-do app",
@@ -279,6 +238,15 @@ function TypeIdeaSection() {
     "Spin-to-win reward ideas",
     "Community for makers",
     "Auto resume generator",
+  ];
+
+  const ideas = [
+    "An AI that designs landing pages instantly",
+    "A tool that finds the best startup name",
+    "A social app for sharing micro-projects",
+    "A marketplace for AI-generated assets",
+    "A platform to test product ideas fast",
+    "An app that turns sketches into real UIs",
   ];
 
   const [index, setIndex] = useState(0);
@@ -292,11 +260,39 @@ function TypeIdeaSection() {
   }, []);
 
   return (
-    <div className="relative w-[600px] max-w-[90%]">
-      <div className="focus-within:ring-accent relative flex items-center justify-between rounded-[10px] border border-neutral-200 bg-white/70 p-4 shadow-md backdrop-blur-lg focus-within:ring-2">
+    <div className="border-neutral relative flex h-84 flex-1 flex-col items-center justify-around rounded-xl border bg-white p-4 shadow-sm">
+      <div className="relative flex h-[400px] w-full flex-col gap-6 overflow-hidden mask-t-from-80% mask-b-from-80% mask-[bg-red-500] p-2">
+        <div className="flex w-full flex-col gap-6">
+          <div className="animate-marquee-vertical flex w-full flex-col gap-y-6">
+            {ideas.map((e, i) => (
+              <div
+                className="flex w-full flex-row items-center justify-start gap-x-1 rounded-md border border-neutral-200 bg-neutral-50 p-2"
+                key={i}
+              >
+                <DevicePhoneMobileIcon width={12} />
+                <p className={`${funnel.className} text-xs`}>{e}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="animate-marquee-vertical flex w-full flex-col gap-y-6">
+            {ideas.map((e, i) => (
+              <div
+                className="flex w-full flex-row items-center justify-start gap-x-1 rounded-md border border-neutral-200 bg-neutral-50 p-2"
+                key={i}
+              >
+                <DevicePhoneMobileIcon width={12} />
+                <p className={`${funnel.className} text-xs`}>{e}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div className="focus-within:ring-accent relative flex w-full items-center justify-between rounded-lg border border-neutral-200 bg-white/70 px-4 py-2 shadow-md">
         <input
           type="text"
-          className="w-full bg-transparent text-lg font-medium text-neutral-800 placeholder-transparent focus:outline-none"
+          className={`${funnel.className} w-full bg-transparent text-lg font-medium text-neutral-800 placeholder-transparent focus:outline-none`}
           placeholder={placeholders[index]}
         />
         <div className="absolute text-neutral-400">
@@ -307,20 +303,13 @@ function TypeIdeaSection() {
               animate={{ opacity: 1, y: 0, rotateX: 0 }}
               exit={{ opacity: 0, y: -10, rotateX: -90 }}
               transition={{ duration: 0.6, ease: "easeInOut" }}
-              className="pointer-events-none text-neutral-400 select-none"
+              className={`${funnel.className} pointer-events-none text-neutral-400 select-none`}
             >
               {placeholders[index]}
             </motion.span>
           </AnimatePresence>
         </div>
       </div>
-
-      {/* Optional floating “cursor” indicator */}
-      <motion.div
-        className="bg-accent absolute top-1/2 right-4 h-5 w-0.5 -translate-y-1/2"
-        animate={{ opacity: [1, 0, 1] }}
-        transition={{ duration: 0.8, repeat: Infinity }}
-      />
     </div>
   );
 }

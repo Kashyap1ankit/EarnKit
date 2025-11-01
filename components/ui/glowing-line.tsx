@@ -40,7 +40,7 @@ export function GlowingLineChart() {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Glowing Line Chart</CardTitle>
+        <CardTitle>Your App Traffic</CardTitle>
         <CardDescription>January - June 2024</CardDescription>
       </CardHeader>
       <CardContent>
