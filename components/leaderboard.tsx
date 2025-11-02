@@ -1,8 +1,23 @@
 "use client";
 
 import { funnel } from "@/lib/font";
-import { TrophyIcon } from "@heroicons/react/24/outline";
+import {
+  BanknotesIcon,
+  ChartBarIcon,
+  TrophyIcon,
+} from "@heroicons/react/24/outline";
 import { useState } from "react";
+import {
+  Table,
+  TableBody,
+  TableCaption,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
+import { PiMedalFill } from "react-icons/pi";
+import { motion } from "motion/react";
 
 export default function LeaderBoard() {
   const [activeTab, setActiveTab] = useState("today");
@@ -25,14 +40,14 @@ export default function LeaderBoard() {
   function switchComponent() {
     switch (activeTab) {
       case "today":
-        return <div>Today</div>;
+        return <LeaderBoardTable />;
       case "week":
-        return <div>week</div>;
+        return <LeaderBoardTable />;
       case "all":
-        return <div>all</div>;
+        return <LeaderBoardTable />;
 
       default:
-        return <div>rodat</div>;
+        return <LeaderBoardTable />;
     }
   }
 
@@ -52,7 +67,7 @@ export default function LeaderBoard() {
         </p>
       </div>
 
-      <div>
+      <div className="flex flex-col gap-y-12">
         <div className="mx-auto flex w-fit flex-row gap-x-4 rounded-full bg-neutral-100 p-2 py-1">
           {types.map((e, i: number) => {
             return (
@@ -74,5 +89,114 @@ export default function LeaderBoard() {
         <div>{switchComponent()}</div>
       </div>
     </div>
+  );
+}
+
+function LeaderBoardTable() {
+  return (
+    <Table className="mx-auto w-11/12 rounded-lg md:w-3/4">
+      <TableHeader>
+        <TableRow className="bg-accent">
+          <TableHead className={`${funnel.className} rounded-tl-md p-4`}>
+            Rank
+          </TableHead>
+          <TableHead className={`${funnel.className} p-4`}>App Name</TableHead>
+          <TableHead className={`${funnel.className} p-4`}>Creator</TableHead>
+          <TableHead className={`${funnel.className} p-4 text-right`}>
+            24h Volume
+          </TableHead>
+          <TableHead
+            className={`${funnel.className} rounded-tr-md p-4 text-right`}
+          >
+            Mini Earned
+          </TableHead>
+        </TableRow>
+      </TableHeader>
+      <TableBody className="cursor-pointer border">
+        {[
+          {
+            appName: "Twice",
+            creator: "Ankit Kashyap",
+            volume: "200k",
+            earned: "20k",
+          },
+          {
+            appName: "Twice",
+            creator: "Ankit Kashyap",
+            volume: "200k",
+            earned: "20k",
+          },
+          {
+            appName: "Twice",
+            creator: "Ankit Kashyap",
+            volume: "200k",
+            earned: "20k",
+          },
+          {
+            appName: "Twice",
+            creator: "Ankit Kashyap",
+            volume: "200k",
+            earned: "20k",
+          },
+        ].map((e, i) => {
+          return (
+            <TableRow>
+              <TableCell className={`my-4 p-4`}>
+                {i === 0 || i === 1 || i === 2 ? (
+                  <PiMedalFill
+                    className={`${i === 0 ? "fill-yellow-300" : i === 1 ? "fill-slate-300" : "fill-yellow-700"}`}
+                    size={24}
+                  />
+                ) : (
+                  <p
+                    className={`${funnel.className} bg-accent flex h-8 w-8 items-center justify-center rounded-full border p-2`}
+                  >
+                    {i}
+                  </p>
+                )}
+              </TableCell>
+              <TableCell className={`${funnel.className} p-4 font-normal`}>
+                {e.appName}
+              </TableCell>
+              <TableCell className={`${funnel.className} p-4 font-normal`}>
+                {e.creator}
+              </TableCell>
+              <TableCell>
+                <div
+                  className={`${funnel.className} flex flex-row items-center justify-end gap-x-2 p-4`}
+                >
+                  <ChartBarIcon width={24} offset={1} />
+                  <p> {e.volume}</p>
+                </div>
+              </TableCell>
+              <TableCell>
+                <div
+                  className={`${funnel.className} flex flex-row items-center justify-end gap-x-2 p-4`}
+                >
+                  <motion.div
+                    animate={{
+                      y: [-5, 0, -5],
+                    }}
+                    transition={{
+                      duration: 5,
+                      repeat: Infinity,
+                    }}
+                  >
+                    <BanknotesIcon
+                      width={24}
+                      offset={1}
+                      color="green"
+                      className="-rotate-10"
+                    />
+                  </motion.div>
+
+                  <p> {e.earned}</p>
+                </div>
+              </TableCell>
+            </TableRow>
+          );
+        })}
+      </TableBody>
+    </Table>
   );
 }
