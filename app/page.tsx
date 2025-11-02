@@ -1,5 +1,6 @@
 import HeroSection from "@/components/hero";
 import HowItWorks from "@/components/how-it-works";
+import LeaderBoard from "@/components/leaderboard";
 import Navbar from "@/components/navbar";
 
 export default function Home() {
@@ -11,6 +12,7 @@ export default function Home() {
       </div>
       <div className="bg-primary-background flex flex-col gap-y-24">
         <HowItWorks />
+        <LeaderBoard />
       </div>
     </div>
   );

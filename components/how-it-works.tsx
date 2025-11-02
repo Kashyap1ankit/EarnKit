@@ -4,9 +4,11 @@ import { motion, AnimatePresence } from "motion/react";
 import { funnel } from "@/lib/font";
 import {
   CodeBracketIcon,
+  Cog6ToothIcon,
   DevicePhoneMobileIcon,
   LightBulbIcon,
   RocketLaunchIcon,
+  WrenchScrewdriverIcon,
 } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
 import { ClippedAreaChart } from "./ui/clipped.-area-graph";
@@ -39,8 +41,8 @@ export default function HowItWorks() {
   return (
     <div className="flex flex-col gap-y-12">
       <div className="flex flex-col gap-y-4">
-        <div className="py mx-auto flex w-fit flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-200 px-4">
-          <div className="bg-secondary-btn h-2 w-2 rounded-full" />
+        <div className="py mx-auto flex w-fit flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-200 px-4 py-1">
+          <Cog6ToothIcon width={12} />
           <p className={`${funnel.className} text-xs`}>Working</p>
         </div>
 
@@ -261,7 +263,7 @@ function TypeIdeaSection() {
 
   return (
     <div className="border-neutral relative flex h-84 flex-1 flex-col items-center justify-around rounded-xl border bg-white p-4 shadow-sm">
-      <div className="relative flex h-[400px] w-full flex-col gap-6 overflow-hidden mask-t-from-80% mask-b-from-80% mask-[bg-red-500] p-2">
+      <div className="relative flex h-[400px] w-full flex-col gap-6 overflow-hidden mask-t-from-80% mask-b-from-80% p-2">
         <div className="flex w-full flex-col gap-6">
           <div className="animate-marquee-vertical flex w-full flex-col gap-y-6">
             {ideas.map((e, i) => (
