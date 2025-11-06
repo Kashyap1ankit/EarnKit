@@ -12,9 +12,9 @@ export default function Footer() {
           width={500}
           height={500}
           alt="logo"
-          className="absolute -z-1 h-fit w-full opacity-30"
+          className="absolute z-20 h-fit w-full opacity-50"
         />
-        <div className="mx-auto flex h-full flex-col items-center justify-center gap-y-6 border p-4">
+        <div className="relative z-30 mx-auto flex h-full flex-col items-center justify-center gap-y-6 border p-4">
           <Image
             src={"/logo-2.png"}
             width={500}
