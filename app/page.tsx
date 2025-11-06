@@ -1,3 +1,4 @@
+import Footer from "@/components/footer";
 import HeroSection from "@/components/hero";
 import HowItWorks from "@/components/how-it-works";
 import LeaderBoard from "@/components/leaderboard";
@@ -13,6 +14,7 @@ export default function Home() {
       <div className="bg-primary-background flex flex-col gap-y-24">
         <HowItWorks />
         <LeaderBoard />
+        <Footer />
       </div>
     </div>
   );
