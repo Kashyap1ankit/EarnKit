@@ -10,7 +10,6 @@ import { useState } from "react";
 import {
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableHead,
   TableHeader,
@@ -18,6 +17,7 @@ import {
 } from "@/components/ui/table";
 import { PiMedalFill } from "react-icons/pi";
 import { motion } from "motion/react";
+import { allTime, thisWeek, today } from "@/lib/constant";
 
 export default function LeaderBoard() {
   const [activeTab, setActiveTab] = useState("today");
@@ -40,14 +40,14 @@ export default function LeaderBoard() {
   function switchComponent() {
     switch (activeTab) {
       case "today":
-        return <LeaderBoardTable />;
+        return <LeaderBoardTable type="today" />;
       case "week":
-        return <LeaderBoardTable />;
+        return <LeaderBoardTable type="week" />;
       case "all":
-        return <LeaderBoardTable />;
+        return <LeaderBoardTable type="all" />;
 
       default:
-        return <LeaderBoardTable />;
+        return <LeaderBoardTable type="today" />;
     }
   }
 
@@ -92,7 +92,11 @@ export default function LeaderBoard() {
   );
 }
 
-function LeaderBoardTable() {
+function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
+  function getArray() {
+    return type === "all" ? allTime : type === "week" ? thisWeek : today;
+  }
+
   return (
     <Table className="mx-auto w-11/12 rounded-lg md:w-3/4">
       <TableHeader>
@@ -113,32 +117,7 @@ function LeaderBoardTable() {
         </TableRow>
       </TableHeader>
       <TableBody className="cursor-pointer border">
-        {[
-          {
-            appName: "Twice",
-            creator: "Ankit Kashyap",
-            volume: "200k",
-            earned: "20k",
-          },
-          {
-            appName: "Twice",
-            creator: "Ankit Kashyap",
-            volume: "200k",
-            earned: "20k",
-          },
-          {
-            appName: "Twice",
-            creator: "Ankit Kashyap",
-            volume: "200k",
-            earned: "20k",
-          },
-          {
-            appName: "Twice",
-            creator: "Ankit Kashyap",
-            volume: "200k",
-            earned: "20k",
-          },
-        ].map((e, i) => {
+        {getArray().map((e, i) => {
           return (
             <TableRow>
               <TableCell className={`my-4 p-4`}>
@@ -156,7 +135,16 @@ function LeaderBoardTable() {
                 )}
               </TableCell>
               <TableCell className={`${funnel.className} p-4 font-normal`}>
-                {e.appName}
+                <div className="group flex flex-row items-center justify-start gap-x-1">
+                  <img
+                    src={e.logo}
+                    width={20}
+                    height={10}
+                    className="rounded-full"
+                  />
+                  <p>/</p>
+                  <p className="group-hover:text-blue-600">{e.appName}</p>
+                </div>
               </TableCell>
               <TableCell className={`${funnel.className} p-4 font-normal`}>
                 {e.creator}
