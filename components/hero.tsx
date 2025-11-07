@@ -121,9 +121,9 @@ export default function HeroSection() {
   }, [errors.idea?.message]);
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-center px-4 pt-24 sm:px-6 md:px-8 md:pt-0">
+    <div className="flex min-h-screen w-full flex-col items-center justify-center border px-4 pt-24 sm:px-6 md:px-8 2xl:pt-0">
       <div className="flex flex-col items-center gap-y-4 text-center sm:gap-y-6">
-        <div className="w-16 rounded-full bg-black p-3 inset-shadow-sm inset-shadow-white/80">
+        <div className="w-12 rounded-full bg-black p-3 inset-shadow-sm inset-shadow-white/80 md:w-16">
           <Image
             src={"/logo-2.png"}
             className="invert"
@@ -156,7 +156,7 @@ export default function HeroSection() {
         onSubmit={handleSubmit(onSubmit)}
         className="mt-16 mb-10 w-full max-w-[800px]"
       >
-        <div className="rounded-2xl border border-neutral-200 bg-white p-4 ring-8 ring-black/10">
+        <div className="rounded-2xl border border-neutral-200 bg-white/80 p-4 ring-4 ring-black/10 backdrop-blur-md sm:ring-6 md:ring-8">
           {files.length > 0 && (
             <div className="mb-4 flex flex-wrap gap-3">
               {files.map((f, i) => (
@@ -191,7 +191,7 @@ export default function HeroSection() {
               textareaRef.current = el;
             }}
             placeholder="Spin-to-win rewards for my podcast listeners"
-            className={`no-scrollbar min-h-[40px] w-full resize-none text-sm outline-none sm:text-base ${funnel.className}`}
+            className={`no-scrollbar min-h-[40px] w-full resize-none text-sm outline-none sm:text-base ${funnel.className} `}
           />
 
           <div className="mt-4 flex flex-row flex-wrap items-center justify-between gap-y-3">
@@ -224,7 +224,7 @@ export default function HeroSection() {
               >
                 <PaperClipIcon width={16} height={16} color="gray" />
                 <p
-                  className={`text-sm font-semibold text-gray-500 ${funnel.className}`}
+                  className={`text-xs font-semibold text-gray-500 md:text-sm ${funnel.className}`}
                 >
                   Attach
                 </p>
@@ -266,7 +266,7 @@ export default function HeroSection() {
                 type="submit"
                 variant={"outline"}
                 disabled={disabled}
-                className={`flex h-10 w-10 items-center justify-center rounded-full border border-neutral-200 ${
+                className={`flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 md:h-10 md:w-10 ${
                   disabled
                     ? "bg-[#00000033] hover:bg-gray-100"
                     : "bg-linear-to-t from-gray-800 to-white"
@@ -291,7 +291,7 @@ export default function HeroSection() {
         />
       </form>
 
-      <div className="flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+      <div className="mb-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
         {["Spin App", "Launchpad", "Music Token", "Quest"].map((idea) => (
           <div
             key={idea}

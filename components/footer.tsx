@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Footer() {
   return (
     <div className="flex flex-col items-center justify-center gap-y-24">
-      <div className="from-secondary-btn/20 via-secondary-btn/40 to-secondary-btn/70 relative mx-auto h-80 w-3/4 overflow-hidden rounded-2xl bg-radial-[at_50%_75%] to-90%">
+      <div className="from-secondary-btn/20 via-secondary-btn/40 to-secondary-btn/70 relative mx-auto w-11/12 overflow-hidden rounded-2xl bg-radial-[at_50%_75%] to-90% md:w-3/4 lg:py-12">
         <Image
           src={"/noise.png"}
           width={500}
@@ -16,7 +16,7 @@ export default function Footer() {
           alt="logo"
           className="absolute z-20 h-fit w-full opacity-50"
         />
-        <div className="relative z-30 mx-auto flex h-full flex-col items-center justify-center gap-y-6 border p-4">
+        <div className="relative z-30 mx-auto flex h-full flex-col items-center justify-center gap-y-6 p-4">
           <Image
             src={"/logo-2.png"}
             width={500}
@@ -25,7 +25,9 @@ export default function Footer() {
             className="mx-auto h-12 w-12 rounded-md bg-white p-2 shadow-md"
           />
 
-          <p className={`${funnel.className} text-center text-5xl font-bold`}>
+          <p
+            className={`${funnel.className} xltext-5xl text-center text-2xl font-bold md:text-4xl`}
+          >
             Get Started With Earnkit Today
           </p>
 
@@ -44,7 +46,7 @@ export default function Footer() {
       </div>
 
       <div className="bg-accent flex min-h-52 w-11/12 flex-col gap-y-12 rounded-t-3xl p-12">
-        <div className="flex flex-row items-center justify-between">
+        <div className="flex flex-col items-center justify-between gap-y-12 md:flex-row">
           <div className="flex flex-col gap-y-4">
             <Image
               src={"/earnkit-logo.png"}

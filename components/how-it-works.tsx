@@ -47,13 +47,13 @@ export default function HowItWorks() {
         </div>
 
         <p
-          className={`${funnel.className} text-center text-4xl leading-tight font-bold sm:text-3xl md:text-4xl`}
+          className={`${funnel.className} text-center text-3xl leading-tight font-bold md:text-4xl`}
         >
           How Earnkit Application Works ?
         </p>
       </div>
 
-      <div className="grid-row-1 mx-auto grid w-3/4 gap-4 divide-x divide-y md:grid-cols-3">
+      <div className="mx-auto grid w-11/12 grid-cols-1 gap-4 divide-x divide-y md:w-3/4 md:grid-cols-2 xl:grid-cols-3">
         {howItWorks.map((e, i) => {
           return (
             <div

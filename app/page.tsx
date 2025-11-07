@@ -6,7 +6,7 @@ import Navbar from "@/components/navbar";
 
 export default function Home() {
   return (
-    <div className="flex flex-col gap-y-24">
+    <div className="flex w-full flex-col gap-y-16 overflow-x-hidden md:gap-y-24">
       <div className="w-full bg-[url('/bg.png')] bg-cover bg-center bg-no-repeat">
         <Navbar />
         <HeroSection />
