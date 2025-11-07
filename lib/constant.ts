@@ -1,3 +1,6 @@
+import { RiTwitterXFill } from "react-icons/ri";
+import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+
 export const today = [
   {
     appName: "Twice",
@@ -215,4 +218,31 @@ export const allTime = [
     earned: "1M",
     logo: "https://i.pinimg.com/736x/e3/0d/a9/e30da9a248b8f1d59b570f4af6b50378.jpg",
   },
+];
+
+export const social = [
+  {
+    icon: RiTwitterXFill,
+    link: "https://x.com/kashyap_tweetts",
+  },
+  {
+    icon: FaInstagram,
+    link: "https://www.instagram.com/ankit_kash_yap",
+  },
+  {
+    icon: FaLinkedin,
+    link: "https://www.linkedin.com/in/ankit-kashyap-coder/",
+  },
+  {
+    icon: FaGithub,
+    link: "https://github.com/Kashyap1ankit",
+  },
+];
+
+export const footer = [
+  ["Product", "Features", "Pricing", "Integrations", "Changelog"],
+
+  ["Resources", "Documentation", "Tutorials", "Blog", "Support"],
+
+  ["Company", "About", "Careers", "Contact", "Partners"],
 ];
