@@ -39,6 +39,7 @@ export default function Navbar() {
 
       <div>
         <Button
+          aria-label="Login Button"
           size={"sm"}
           className="cursor-pointer rounded-lg bg-white/50 p-4 px-6 py-2 hover:bg-white/50"
         >

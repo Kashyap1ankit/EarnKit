@@ -14,6 +14,7 @@ export default function Footer() {
           width={500}
           height={500}
           alt="logo"
+          aria-label="Noise Bg"
           className="absolute z-20 h-fit w-full opacity-50"
         />
         <div className="relative z-30 mx-auto flex h-full flex-col items-center justify-center gap-y-6 p-4">
@@ -22,6 +23,7 @@ export default function Footer() {
             width={500}
             height={500}
             alt="logo"
+            aria-label="Logo icon"
             className="mx-auto h-12 w-12 rounded-md bg-white p-2 shadow-md"
           />
 
@@ -32,12 +34,16 @@ export default function Footer() {
           </p>
 
           <div className="flex flex-row items-center justify-center gap-x-8">
-            <Button className="cursor-pointer">
+            <Button className="cursor-pointer" aria-label="Launch Button">
               <p className={`${funnel.className} text-xs`}>Launch App</p>
               <RocketLaunchIcon color="white" className="w-8" />
             </Button>
 
-            <Button variant={"outline"} className="cursor-pointer">
+            <Button
+              variant={"outline"}
+              className="cursor-pointer"
+              aria-label="Learn More Button"
+            >
               <p className={`${funnel.className} text-xs`}>Learn More</p>
               <BookOpenIcon color="black" className="w-8" />
             </Button>
@@ -54,6 +60,7 @@ export default function Footer() {
               height={500}
               className="w-32 rounded-xl"
               alt="logo"
+              aria-label="Second logo Bg"
             />
 
             <p
@@ -66,7 +73,7 @@ export default function Footer() {
             <div className="flex flex-row items-center justify-start gap-x-2 md:mt-6">
               {social.map((e, i) => {
                 return (
-                  <Link href={e.link} key={i}>
+                  <Link href={e.link} key={i} aria-label={`social-${i}-icon`}>
                     <e.icon className="size-4" />
                   </Link>
                 );

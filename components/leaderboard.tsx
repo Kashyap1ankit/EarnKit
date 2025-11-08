@@ -18,6 +18,7 @@ import {
 import { PiMedalFill } from "react-icons/pi";
 import { motion } from "motion/react";
 import { allTime, thisWeek, today, types } from "@/lib/constant";
+import Image from "next/image";
 
 export default function LeaderBoard() {
   const [activeTab, setActiveTab] = useState("today");
@@ -129,6 +130,8 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
                     src={e.logo}
                     width={20}
                     height={10}
+                    alt="app logo"
+                    aria-label="app logo"
                     className="rounded-full"
                   />
                   <p>/</p>

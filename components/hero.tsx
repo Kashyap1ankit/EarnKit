@@ -129,6 +129,7 @@ export default function HeroSection() {
             width={500}
             height={500}
             alt="logo-2"
+            aria-label="Second logo Bg"
           />
         </div>
 
@@ -196,7 +197,7 @@ export default function HeroSection() {
           <div className="mt-4 flex flex-row flex-wrap items-center justify-between gap-y-3">
             <div className="flex flex-row items-center gap-x-3 sm:gap-x-4">
               <Popover>
-                <PopoverTrigger>
+                <PopoverTrigger aria-label="more option btn">
                   <div className="flex w-fit cursor-pointer items-center justify-center gap-x-1 rounded-full border border-neutral-100 bg-gray-400/10 p-1 hover:border-neutral-200 hover:bg-gray-400/10">
                     <PlusIcon width={16} height={16} />
                   </div>
@@ -265,6 +266,7 @@ export default function HeroSection() {
                 type="submit"
                 variant={"outline"}
                 disabled={disabled}
+                aria-label="Submit app Button"
                 className={`flex h-8 w-8 items-center justify-center rounded-full border border-neutral-200 md:h-10 md:w-10 ${
                   disabled
                     ? "bg-[#00000033] hover:bg-gray-100"
