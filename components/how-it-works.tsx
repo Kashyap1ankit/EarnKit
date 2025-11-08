@@ -1,10 +1,31 @@
+"use client";
+
 import { howItWorks } from "@/lib/constant";
 import { funnel } from "@/lib/font";
 import { Cog6ToothIcon } from "@heroicons/react/24/outline";
+import { motion } from "motion/react";
 
 export default function HowItWorks() {
   return (
-    <div className="flex flex-col gap-y-12">
+    <motion.div
+      className="flex flex-col gap-y-12"
+      initial={{
+        opacity: 0,
+        y: 100,
+        filter: "blur(10px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+      }}
+      transition={{
+        type: "spring",
+      }}
+      viewport={{
+        once: true,
+      }}
+    >
       <div className="flex flex-col gap-y-4">
         <div className="py mx-auto flex w-fit flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-200 px-4 py-1">
           <Cog6ToothIcon width={12} />
@@ -53,6 +74,6 @@ export default function HowItWorks() {
           );
         })}
       </div>
-    </div>
+    </motion.div>
   );
 }

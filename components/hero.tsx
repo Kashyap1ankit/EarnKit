@@ -23,6 +23,7 @@ import {
 } from "@/components/ui/popover";
 import { FigmaIcon } from "lucide-react";
 import Image from "next/image";
+import { motion } from "motion/react";
 
 export default function HeroSection() {
   const [files, setFiles] = useState<File[]>([]);
@@ -119,10 +120,38 @@ export default function HeroSection() {
     if (errors.idea?.message) toast.error(errors.idea.message);
   }, [errors.idea?.message]);
 
+  const container = {
+    hidden: { opacity: 0 },
+    show: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+      },
+    },
+  };
+
+  const item = {
+    hidden: { y: 50, opacity: 0, filter: "blur(10px)" },
+    show: {
+      y: 0,
+      opacity: 1,
+      filter: "blur(0px)",
+      transition: { duration: 0.8 },
+    },
+  };
+
   return (
-    <div className="flex min-h-screen w-full flex-col items-center justify-center border px-4 pt-24 sm:px-6 md:px-8 2xl:pt-0">
+    <motion.div
+      variants={container}
+      initial="hidden"
+      animate="show"
+      className="flex min-h-screen w-full flex-col items-center justify-center border px-4 pt-24 sm:px-6 md:px-8 2xl:pt-0"
+    >
       <div className="flex flex-col items-center gap-y-4 text-center sm:gap-y-6">
-        <div className="w-12 rounded-full bg-black p-3 inset-shadow-sm inset-shadow-white/80 md:w-16">
+        <motion.div
+          variants={item}
+          className="w-12 rounded-full bg-black p-3 inset-shadow-sm inset-shadow-white/80 md:w-16"
+        >
           <Image
             src={"/logo-2.png"}
             className="invert"
@@ -131,9 +160,10 @@ export default function HeroSection() {
             alt="logo-2"
             aria-label="Second logo Bg"
           />
-        </div>
+        </motion.div>
 
-        <p
+        <motion.p
+          variants={item}
           className={`${funnel.className} text-4xl leading-tight font-medium sm:text-5xl md:text-6xl`}
         >
           Build viral miniapps on{" "}
@@ -143,16 +173,18 @@ export default function HeroSection() {
               Farcaster
             </span>
           </span>
-        </p>
+        </motion.p>
 
-        <p
+        <motion.p
+          variants={item}
           className={`${funnel.className} text-base font-medium text-neutral-500 sm:text-lg md:text-xl`}
         >
           Create miniapps with a single prompt—no coding required.
-        </p>
+        </motion.p>
       </div>
 
-      <form
+      <motion.form
+        variants={item}
         onSubmit={handleSubmit(onSubmit)}
         className="mt-16 mb-10 w-full max-w-[800px]"
       >
@@ -290,9 +322,12 @@ export default function HeroSection() {
           onChange={handleFileChange}
           multiple
         />
-      </form>
+      </motion.form>
 
-      <div className="mb-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+      <motion.div
+        variants={item}
+        className="mb-4 flex flex-wrap items-center justify-center gap-3 sm:gap-4"
+      >
         {["Spin App", "Launchpad", "Music Token", "Quest"].map((idea) => (
           <div
             key={idea}
@@ -305,7 +340,7 @@ export default function HeroSection() {
             <ArrowLongUpIcon className="size-4 text-black/60" />
           </div>
         ))}
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 }

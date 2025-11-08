@@ -18,7 +18,6 @@ import {
 import { PiMedalFill } from "react-icons/pi";
 import { motion } from "motion/react";
 import { allTime, thisWeek, today, types } from "@/lib/constant";
-import Image from "next/image";
 
 export default function LeaderBoard() {
   const [activeTab, setActiveTab] = useState("today");
@@ -38,7 +37,25 @@ export default function LeaderBoard() {
   }
 
   return (
-    <div className="flex flex-col gap-y-12">
+    <motion.div
+      initial={{
+        opacity: 0,
+        y: 100,
+        filter: "blur(10px)",
+      }}
+      whileInView={{
+        opacity: 1,
+        y: 0,
+        filter: "blur(0px)",
+      }}
+      transition={{
+        type: "spring",
+      }}
+      viewport={{
+        once: true,
+      }}
+      className="flex flex-col gap-y-12"
+    >
       <div className="flex flex-col gap-y-4">
         <div className="py mx-auto flex w-fit flex-row items-center justify-center gap-x-1 rounded-full border border-neutral-200 px-4 py-1">
           <TrophyIcon width={12} />
@@ -74,7 +91,7 @@ export default function LeaderBoard() {
 
         <div>{switchComponent()}</div>
       </div>
-    </div>
+    </motion.div>
   );
 }
 

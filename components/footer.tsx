@@ -1,14 +1,35 @@
+"use client";
+
 import { funnel } from "@/lib/font";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import { BookOpenIcon, RocketLaunchIcon } from "@heroicons/react/24/outline";
 import { footer, social } from "@/lib/constant";
 import Link from "next/link";
+import { motion } from "motion/react";
 
 export default function Footer() {
   return (
     <div className="flex flex-col items-center justify-center gap-y-24">
-      <div className="from-secondary-btn/20 via-secondary-btn/40 to-secondary-btn/70 relative mx-auto w-11/12 overflow-hidden rounded-2xl bg-radial-[at_50%_75%] to-90% md:w-3/4 lg:py-12">
+      <motion.div
+        initial={{
+          opacity: 0,
+          y: 100,
+          filter: "blur(10px)",
+        }}
+        whileInView={{
+          opacity: 1,
+          y: 0,
+          filter: "blur(0px)",
+        }}
+        transition={{
+          type: "spring",
+        }}
+        viewport={{
+          once: true,
+        }}
+        className="from-secondary-btn/20 via-secondary-btn/40 to-secondary-btn/70 relative mx-auto w-11/12 overflow-hidden rounded-2xl bg-radial-[at_50%_75%] to-90% md:w-3/4 lg:py-12"
+      >
         <Image
           src={"/noise.png"}
           width={500}
@@ -49,9 +70,28 @@ export default function Footer() {
             </Button>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      <div className="bg-accent flex min-h-52 w-11/12 flex-col gap-y-12 rounded-t-3xl p-4 md:p-12">
+      <motion.div
+        initial={{
+          opacity: 0,
+
+          filter: "blur(10px)",
+        }}
+        whileInView={{
+          opacity: 1,
+
+          filter: "blur(0px)",
+        }}
+        transition={{
+          duration: 1,
+          type: "keyframes",
+        }}
+        viewport={{
+          once: true,
+        }}
+        className="bg-accent flex min-h-52 w-11/12 flex-col gap-y-12 rounded-t-3xl p-4 md:p-12"
+      >
         <div className="flex flex-col items-center justify-between gap-y-12 sm:flex-row">
           <div className="flex flex-col gap-y-4">
             <Image
@@ -120,7 +160,7 @@ export default function Footer() {
             </p>
           </div>
         </div>
-      </div>
+      </motion.div>
     </div>
   );
 }
