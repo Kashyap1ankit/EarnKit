@@ -6,7 +6,6 @@ import {
   ArrowUpIcon,
   CircleStackIcon,
   DocumentIcon,
-  PaperAirplaneIcon,
   PaperClipIcon,
   PlusIcon,
   XMarkIcon,

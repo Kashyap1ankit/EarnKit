@@ -1,5 +1,15 @@
 import { RiTwitterXFill } from "react-icons/ri";
 import { FaGithub, FaInstagram, FaLinkedin } from "react-icons/fa";
+import { ClippedAreaChart } from "@/components/ui/clipped.-area-graph";
+import {
+  CodeBracketIcon,
+  Cog6ToothIcon,
+  DevicePhoneMobileIcon,
+  LightBulbIcon,
+  RocketLaunchIcon,
+} from "@heroicons/react/24/outline";
+import GenerateEverythingSvg from "@/components/generate-svg";
+import TypeIdeaSection from "@/components/type-idea";
 
 export const today = [
   {
@@ -260,4 +270,45 @@ export const types = [
     title: "All time",
     value: "all",
   },
+];
+
+export const howItWorks = [
+  {
+    title: "Type an Idea",
+    subtitle:
+      "Describe your idea clearly and simply, as if you are explaining it to someone with no background in the topic. Focus on what problem it solves.",
+    component: TypeIdeaSection,
+    icon: LightBulbIcon,
+  },
+  {
+    title: "We Generate Everything",
+    subtitle:
+      "AI generates the smart contracts, user interface, and mini-app, ready for instant iteration. Just test and add more features with one line prompts",
+    component: GenerateEverythingSvg,
+    icon: CodeBracketIcon,
+  },
+  {
+    title: "Launch & Earn",
+    subtitle:
+      "Deploy your token on-chain with one click. Launch, iterate, and start earning $MINI rewards from day one.",
+    component: ClippedAreaChart,
+    icon: RocketLaunchIcon,
+  },
+];
+
+export const placeholders = [
+  "An AI-powered to-do app",
+  "A platform for indie devs",
+  "Spin-to-win reward ideas",
+  "Community for makers",
+  "Auto resume generator",
+];
+
+export const ideas = [
+  "An AI that designs landing pages instantly",
+  "A tool that finds the best startup name",
+  "A social app for sharing micro-projects",
+  "A marketplace for AI-generated assets",
+  "A platform to test product ideas fast",
+  "An app that turns sketches into real UIs",
 ];

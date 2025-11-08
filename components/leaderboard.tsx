@@ -93,7 +93,9 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
           <TableHead className={`${funnel.className} hidden p-4 sm:table-cell`}>
             Creator
           </TableHead>
-          <TableHead className={`${funnel.className} p-4 text-right`}>
+          <TableHead
+            className={`${funnel.className} hidden p-4 text-right sm:table-cell`}
+          >
             24h Volume
           </TableHead>
           <TableHead
@@ -138,7 +140,7 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
               >
                 {e.creator}
               </TableCell>
-              <TableCell>
+              <TableCell className="hidden sm:table-cell">
                 <div
                   className={`${funnel.className} flex flex-row items-center justify-end gap-x-2 p-4`}
                 >

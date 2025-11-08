@@ -1,8 +1,9 @@
-import Footer from "@/components/footer";
-import HeroSection from "@/components/hero";
-import HowItWorks from "@/components/how-it-works";
-import LeaderBoard from "@/components/leaderboard";
-import Navbar from "@/components/navbar";
+import dynamic from "next/dynamic";
+const Footer = dynamic(() => import("@/components/footer"));
+const HeroSection = dynamic(() => import("@/components/hero"));
+const HowItWorks = dynamic(() => import("@/components/how-it-works"));
+const LeaderBoard = dynamic(() => import("@/components/leaderboard"));
+const Navbar = dynamic(() => import("@/components/navbar"));
 
 export default function Home() {
   return (
