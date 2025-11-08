@@ -10,7 +10,7 @@ export default function Navbar() {
 
   useEffect(() => {
     function handleScrollBlur() {
-      if (window.scrollY > 10) {
+      if (window.scrollY > 30) {
         setAddBlur(true);
         return;
       }
@@ -24,7 +24,7 @@ export default function Navbar() {
 
   return (
     <div
-      className={`fixed top-2 z-50 flex flex-row items-center justify-between px-2 py-2 duration-500 md:px-12 ${addBlur ? "left-1/2 w-11/12 -translate-x-1/2 rounded-md border-b border-neutral-200 bg-white/20 backdrop-blur-[17px] md:mx-auto md:w-1/2" : "left-0 w-full"}`}
+      className={`fixed top-2 left-1/2 z-50 flex -translate-x-1/2 flex-row items-center justify-between px-2 py-2 duration-500 md:px-12 ${addBlur ? "w-11/12 rounded-md border-b border-neutral-200 bg-white/20 backdrop-blur-[17px] md:mx-auto md:w-1/2" : "left-0 w-full"}`}
     >
       <div>
         <Image
