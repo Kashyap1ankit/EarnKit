@@ -53,12 +53,12 @@ export default function HowItWorks() {
         </p>
       </div>
 
-      <div className="mx-auto grid w-11/12 grid-cols-1 gap-4 divide-x divide-y md:w-3/4 md:grid-cols-2 xl:grid-cols-3">
+      <div className="mx-auto grid w-11/12 grid-cols-1 gap-4 divide-x divide-y md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 2xl:w-3/4">
         {howItWorks.map((e, i) => {
           return (
             <div
               key={i}
-              className="flex h-full w-full cursor-pointer flex-col gap-y-6 overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 p-4"
+              className="flex h-full w-full cursor-pointer flex-col gap-y-6 overflow-hidden rounded-3xl border border-neutral-100 bg-neutral-50 p-4 md:last:col-span-2 lg:last:col-span-1"
             >
               <div className="bg-secondary-btn flex w-fit flex-row items-center justify-start gap-x-1 rounded-lg px-4 py-1 inset-shadow-sm inset-shadow-white/50">
                 <p
