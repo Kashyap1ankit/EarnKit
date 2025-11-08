@@ -90,7 +90,9 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
             Rank
           </TableHead>
           <TableHead className={`${funnel.className} p-4`}>App Name</TableHead>
-          <TableHead className={`${funnel.className} p-4`}>Creator</TableHead>
+          <TableHead className={`${funnel.className} hidden p-4 sm:table-cell`}>
+            Creator
+          </TableHead>
           <TableHead className={`${funnel.className} p-4 text-right`}>
             24h Volume
           </TableHead>
@@ -131,7 +133,9 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
                   <p className="group-hover:text-blue-600">{e.appName}</p>
                 </div>
               </TableCell>
-              <TableCell className={`${funnel.className} p-4 font-normal`}>
+              <TableCell
+                className={`${funnel.className} hidden p-4 font-normal sm:table-cell`}
+              >
                 {e.creator}
               </TableCell>
               <TableCell>
