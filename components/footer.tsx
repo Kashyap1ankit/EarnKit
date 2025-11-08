@@ -45,8 +45,8 @@ export default function Footer() {
         </div>
       </div>
 
-      <div className="bg-accent flex min-h-52 w-11/12 flex-col gap-y-12 rounded-t-3xl p-12">
-        <div className="flex flex-col items-center justify-between gap-y-12 md:flex-row">
+      <div className="bg-accent flex min-h-52 w-11/12 flex-col gap-y-12 rounded-t-3xl p-4 md:p-12">
+        <div className="flex flex-col items-center justify-between gap-y-12 sm:flex-row">
           <div className="flex flex-col gap-y-4">
             <Image
               src={"/earnkit-logo.png"}
@@ -56,15 +56,17 @@ export default function Footer() {
               alt="logo"
             />
 
-            <p className={`${funnel.className} w-3/4 text-xs text-black/70`}>
+            <p
+              className={`${funnel.className} w-11/12 text-xs text-black/70 md:w-3/4`}
+            >
               Earnkit empowers founders to develop app into minutes & launch it
               in seconds and earn Mini rewards
             </p>
 
-            <div className="mt-6 flex flex-row items-center justify-start gap-x-2">
+            <div className="flex flex-row items-center justify-start gap-x-2 md:mt-6">
               {social.map((e, i) => {
                 return (
-                  <Link href={e.link}>
+                  <Link href={e.link} key={i}>
                     <e.icon className="size-4" />
                   </Link>
                 );
@@ -72,13 +74,14 @@ export default function Footer() {
             </div>
           </div>
 
-          <div className="grid grid-cols-3 gap-x-24">
+          <div className="grid w-full grid-cols-3 place-items-center gap-x-4 gap-y-6 md:w-fit md:gap-x-24 md:gap-y-0">
             {footer.map((e: string[], i) => {
               return (
-                <div className="flex flex-col gap-y-2">
-                  {e.map((e2, i) => {
+                <div className="flex flex-col gap-y-2" key={i}>
+                  {e.map((e2, i2) => {
                     return (
                       <p
+                        key={i2}
                         className={`${funnel.className} cursor-pointer text-xs font-light text-black/70 first:text-sm first:font-bold first:text-black`}
                       >
                         {e2}
@@ -91,7 +94,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="flex flex-row items-center justify-between border-t-2 pt-8">
+        <div className="flex flex-col items-center justify-between gap-y-4 border-t-2 pt-8 sm:flex-row sm:gap-y-0">
           <p className={`${funnel.className} text-xs text-black/50`}>
             © 2025 Earnkit. All rights reserved
           </p>

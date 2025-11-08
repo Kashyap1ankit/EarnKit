@@ -246,3 +246,18 @@ export const footer = [
 
   ["Company", "About", "Careers", "Contact", "Partners"],
 ];
+
+export const types = [
+  {
+    title: "Today",
+    value: "today",
+  },
+  {
+    title: "This Week",
+    value: "week",
+  },
+  {
+    title: "All time",
+    value: "all",
+  },
+];

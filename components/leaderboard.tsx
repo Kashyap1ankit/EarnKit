@@ -17,25 +17,10 @@ import {
 } from "@/components/ui/table";
 import { PiMedalFill } from "react-icons/pi";
 import { motion } from "motion/react";
-import { allTime, thisWeek, today } from "@/lib/constant";
+import { allTime, thisWeek, today, types } from "@/lib/constant";
 
 export default function LeaderBoard() {
   const [activeTab, setActiveTab] = useState("today");
-
-  const types = [
-    {
-      title: "Today",
-      value: "today",
-    },
-    {
-      title: "This Week",
-      value: "week",
-    },
-    {
-      title: "All time",
-      value: "all",
-    },
-  ];
 
   function switchComponent() {
     switch (activeTab) {
@@ -60,7 +45,7 @@ export default function LeaderBoard() {
         </div>
 
         <p
-          className={`${funnel.className} text-center text-4xl leading-tight font-bold sm:text-3xl md:text-4xl`}
+          className={`${funnel.className} text-center text-3xl leading-tight font-bold md:text-4xl`}
         >
           Earnkit <span className="text-secondary-btn font-bolder">$Mini</span>{" "}
           Winners Leaderboard
@@ -98,7 +83,7 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
   }
 
   return (
-    <Table className="mx-auto w-11/12 rounded-lg md:w-3/4">
+    <Table className="mx-auto w-11/12 rounded-lg xl:w-3/4">
       <TableHeader>
         <TableRow className="bg-accent">
           <TableHead className={`${funnel.className} rounded-tl-md p-4`}>
@@ -119,7 +104,7 @@ function LeaderBoardTable({ type }: { type: "today" | "all" | "week" }) {
       <TableBody className="cursor-pointer border">
         {getArray().map((e, i) => {
           return (
-            <TableRow>
+            <TableRow key={i}>
               <TableCell className={`my-4 p-4`}>
                 {i === 0 || i === 1 || i === 2 ? (
                   <PiMedalFill
